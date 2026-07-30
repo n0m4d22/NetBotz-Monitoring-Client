@@ -13,38 +13,18 @@ def silence_alert():
     # Silence the alarm
     winsound.PlaySound(None, winsound.SND_PURGE)
 
-# definition of a temperature alarm
-def temperature_alert(node):
+# alert definition that adapts based on "type"
+def alert(node, type):
     # windows config
     window = tk.Tk()
-    window.title("Temperature Alert")
-    window.geometry("350x200")
-    window.resizable(False, False)
-        
-    # labels and ui elements
-    status_label = tk.Label(window, text=f"CRITICAL: {node.label} Temperature {node.temperature} Exceeded", fg="red", font=("Arial", 11, "bold"))
-    status_label.pack(pady=20)
-
-    # silence button config
-    silence_button = tk.Button(window, text="Silence", command=silence_alert, bg="white", fg="black", font=("Arial", 10, "bold"), width=15, height=2)
-    silence_button.pack(pady=10)
-        
-    window.after(100, play_alert)
-        
-    window.mainloop()
-
-# definition of a humidity alarm
-def humidity_alert(node):
-    # windows config
-    window = tk.Tk()
-    window.title("Humidity Alert")
+    window.title(f"Alert: {type}")
     window.geometry("350x200")
     window.resizable(False, False)
             
     # labels and ui elements
-    status_label = tk.Label(window, text=f"CRITICAL: {node.label} Humidity {node.humidity} Exceeded", fg="red", font=("Arial", 11, "bold"))
-    status_label.pack(pady=10)
-
+    status_label = tk.Label(window, text=f"CRITICAL: {node.label} {type}: {node.temperature}", fg="red", font=("Arial", 11, "bold"))
+    status_label.pack(pady=20)
+    
     # silence button config
     silence_button = tk.Button(window, text="Silence", command=silence_alert, bg="white", fg="black", font=("Arial", 10, "bold"), width=15, height=2)
     silence_button.pack(pady=10)

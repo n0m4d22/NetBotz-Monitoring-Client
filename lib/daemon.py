@@ -38,29 +38,29 @@ def start(NETBOTZ_NODES, NETBOTZ_CREDENTIALS):
                 elif (node.temperature >= DEFAULT_TEMPERATURE_WARNING_HIGH):
                     print(f"[{timestamp}]: {node.label}: Temperature increased to abnormal levels. ({node.temperature})") 
                 else:
-                    print(f"[{timestamp}]: {node.label}: Temperature on normal levels. ({node.temperature})")
+                    print(f"[{timestamp}]: {node.label}: Temperature: {node.temperature} °C")
                 if (node.humidity <= DEFAULT_HUMIDITY_WARNING_LOW):
                     print(f"[{timestamp}]: {node.label}: Humidity decreased to abnormal levels. ({node.humidity})")
                 elif (node.humidity >= DEFAULT_HUMIDITY_WARNING_HIGH):
                     print(f"[{timestamp}]: {node.label}: Humidity increased to abnormal levels. ({node.humidity})")
                 else:
-                    print(f"[{timestamp}]: {node.label}: Humidity on normal levels. ({node.humidity})")            
+                    print(f"[{timestamp}]: {node.label}: Humidity: {node.humidity} RH%")            
 
                 # Alerts
                 if (node.temperature <= DEFAULT_TEMPERATURE_CRITICAL_LOW):
                     print(f"[{timestamp}]: {node.label}: Temperature decreased to critical levels. ({node.temperature})")
-                    alerts.temperature_alert(node)
+                    alerts.alert(node, "temperature")
                 if (node.temperature >= DEFAULT_TEMPERATURE_CRITICAL_HIGH):
                     print(f"[{timestamp}]: {node.label}: Temperature increased to critical levels. ({node.temperature})")
-                    alerts.temperature_alert(node) 
+                    alerts.alert(node, "temperature") 
                 if (node.humidity <= DEFAULT_HUMIDITY_CRITICAL_LOW):
                     print(f"[{timestamp}]: {node.label}: Humidity decreased to critical levels. ({node.humidity})")
-                    alerts.humidity_alert(node)
+                    alerts.alert(node, "humidity")
                 if (node.humidity >= DEFAULT_HUMIDITY_CRITICAL_HIGH):
                     print(f"[{timestamp}]: {node.label}: Humidity increased to critical levels. ({node.humidity})")
-                    alerts.humidity_alert(node)   
-        
-        time.sleep(5)
+                    alerts.alert(node, "humidity")   
+        print("---------------------------------------------------------------")
+        time.sleep(10)
 
 def stop():
     global _active

@@ -13,15 +13,15 @@ thread_running = False
 def show_menu():
     print("\n")
     print("+-----------------------+------------------------+")
-    print("| === NetBotz Monitoring Client v0.1.0-beta ==== |")
+    print("| == NetBotz Monitoring Client v0.1.0-beta.2 === |")
     print("+-----------------------+------------------------+")
     print("|           Authored by Fokos Nikolaos           |")
     print("+-----------------------+------------------------+")
-    print("| 1. Start              | Starts the daemon.     |")
+    print("| 1. Start              | Starts the daemon      |")
     print("+-----------------------+------------------------+")
-    print("| 2. Stop               | Stops the daemon.      |")
+    print("| 2. Stop               | Stops the daemon       |")
     print("+-----------------------+------------------------+")
-    print("| 3. Setup              | NetBotz Setup.         |")
+    print("| 3. Setup              | NetBotz Setup          |")
     print("+-----------------------+------------------------+") 
     print("| 0. Exit               |            -           |")
     print("+-----------------------+------------------------+")
@@ -31,9 +31,11 @@ def show_setup():
     print("+-----------------------+------------------------+")
     print("| =============== NetBotz Setup ================ |")
     print("+-----------------------+------------------------+")
-    print("| 1. Nodes              | Add nodes.             |")
+    print("| 1. Nodes              | Add nodes              |")
     print("+-----------------------+------------------------+")
-    print("| 2. Credentials        | Set login credentials. |")
+    print("| 2. Credentials        | Set login credentials  |")
+    print("+-------------------------------------------------")
+    print("| 3. Overview           | View the configuration |")
     print("+-----------------------+------------------------+")
     print("| 0. Previous           |            -           |")
     print("+-----------------------+------------------------+")
@@ -61,8 +63,7 @@ def main():
             menu_choice = int(input("> "))
         except ValueError:
             print("Invalid Value.")
-
-        # TODO: some functionalities need improvements 
+ 
         if (menu_choice == 1):
             if (thread_running == False):
                 thread = threading.Thread(target=daemon.start, args=(NETBOTZ_NODES, NETBOTZ_CREDENTIALS), daemon=True)
@@ -93,6 +94,9 @@ def main():
                     username = str(input("Username: "))
                     password = str(input("Password: "))
                     setup_credentials(username, password)
+                elif (setup_choice == 3):
+                    print("Nodes: ", NETBOTZ_NODES)
+                    print("Credentials: ", NETBOTZ_CREDENTIALS)
             
             menu_choice = None
             setup_choice = None
