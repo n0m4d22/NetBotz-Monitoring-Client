@@ -13,7 +13,7 @@ thread_running = False
 def show_menu():
     print("\n")
     print("+-----------------------+------------------------+")
-    print("| == NetBotz Monitoring Client v0.1.0-beta.2 === |")
+    print("| == NetBotz Monitoring Client v0.1.0-beta.3 === |")
     print("+-----------------------+------------------------+")
     print("|           Authored by Fokos Nikolaos           |")
     print("+-----------------------+------------------------+")
